@@ -23,22 +23,44 @@ let promptInstance = promptPackage({sigint: true});
 // var n = prompt('What number of Pokemon do you want to see?');
 
 
-let userWantsToExit = false;
+function app() {
+    let userWantsToExit = false;
 
-do {
+    do {
 
-    let n = parseFloat(prompt("What number of Pokemon do you want to see? "));
-    console.log("You entered " + n);
+        let n = parseFloat(prompt("What number of Pokemon do you want to see? "));
+        
+        console.log(typeof(n));
+        console.log("Input is not a number: " + Number.isNaN(n));
 
-    let userInputToExit = prompt("Would you like to try again?");
+        if (Number.isNaN(n)) {
+            throw new Error("User did not enter a number!");
+        }
 
-    if (userInputToExit == "y"){
-        userWantsToExit = false;
-    } else {
-        userWantsToExit = true;
-    }
+        console.log("You entered " + n);
 
-} while (userWantsToExit == false);
+        let userInputToExit = prompt("Would you like to try again?");
+
+        if (userInputToExit == "y"){
+            userWantsToExit = false;
+        } else {
+            userWantsToExit = true;
+        }
+
+    } while (userWantsToExit == false);
+}  
+
+try {
+    app();
+} catch (error) {
+    console.log("Gracefully shutting down...");
+    console.log(error.message);
+    // Full error obj has stacktrace, users oshuld not see that:
+    // console.log(error);
+}
+
+
+
 
 
 // console.log("User entered: " + n);
@@ -57,14 +79,14 @@ do {
 
 
 
-console.log(process.env.ENVIRONMENT_MESSAGE);
+// console.log(process.env.ENVIRONMENT_MESSAGE);
 
 
 
-console.log("Terminal app is ruinning!")
+// console.log("Terminal app is ruinning!")
 
 
 
-pokemonPrinterFile.pokemonPrinter();
+// pokemonPrinterFile.pokemonPrinter();
 
-console.log("Bye bye, terminal app is finished!")
+// console.log("Bye bye, terminal app is finished!")
